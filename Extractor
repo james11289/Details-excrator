@@ -1,0 +1,57 @@
+import cv2
+import pytesseract
+import tkinter as tk
+from tkinter import filedialog
+
+def process_image(image_path):
+    # Load the image using OpenCV
+    image = cv2.imread(image_path)
+
+    # Preprocess the image (e.g., resize, convert to grayscale, apply filters)
+    # ...
+
+    # Apply OCR (Optical Character Recognition) using Tesseract
+    details = pytesseract.image_to_string(image)
+
+    # Extract relevant information from the OCR result
+    # ...
+
+    return details
+
+def select_image():
+    # Create a Tkinter root window
+    root = tk.Tk()
+    root.withdraw()
+
+    # Prompt the user to select an image file
+    file_path = filedialog.askopenfilename()
+
+    return file_path
+
+def upload_and_scan():
+    # Prompt the user to upload the front side of the identification card
+    print("Please select the front side image:")
+    front_image_path = select_image()
+
+    # Process the front side image and extract details
+    front_details = process_image(front_image_path)
+
+    # Prompt the user to upload the back side of the identification card
+    print("Please select the back side image:")
+    back_image_path = select_image()
+
+    # Process the back side image and extract details
+    back_details = process_image(back_image_path)
+
+    # Print the extracted details
+    print("Front Side Details:")
+    print(front_details)
+
+    print("Back Side Details:")
+    print(back_details)
+
+    # Pause the program and wait for user input before ending
+    input("Press Enter to exit...")
+
+# Run the upload and scan function
+upload_and_scan()
